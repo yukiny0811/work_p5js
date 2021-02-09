@@ -1,5 +1,4 @@
 
-let sinArray, cosArray
 
 function setup() {
   createCanvas(windowWidth, windowHeight, P2D)
@@ -10,33 +9,6 @@ function setup() {
   background(0)
   blendMode(ADD)
   frameRate(30)
-  
-  sinArray = [
-    sin(0),
-    sin(36),
-    sin(36 * 2),
-    sin(36 * 3),
-    sin(36 * 4),
-    sin(36 * 5),
-    sin(36 * 6),
-    sin(36 * 7),
-    sin(36 * 8),
-    sin(36 * 9),
-    sin(36 * 10),
-  ]
-  cosArray = [
-    cos(0),
-    cos(36),
-    cos(36 * 2),
-    cos(36 * 3),
-    cos(36 * 4),
-    cos(36 * 5),
-    cos(36 * 6),
-    cos(36 * 7),
-    cos(36 * 8),
-    cos(36 * 9),
-    cos(36 * 10),
-  ]
 }
 
 function draw() {
@@ -79,15 +51,15 @@ function drawBlobWithNoise(noiseValue, sizeDefault, sizeSwing) {
   let fc = millis() / 10
   let size
   size = noise(fc / 300, (360 - 36) / 100, noiseValue) * sizeSwing + sizeDefault
-  curveVertex(centerX + cosArray[9] * size, centerY + sinArray[9] * size)
-  for (let i = 0; i < 10; i++) {
+  curveVertex(centerX + cos(360-36) * size, centerY + sin(360-36) * size)
+  for (let i = 0; i < 360; i+=step) {
     let size = noise(fc / 300, i / 100, noiseValue) * sizeSwing + sizeDefault
-    curveVertex(centerX + cosArray[i] * size, centerY + sinArray[i] * size)
+    curveVertex(centerX + cos(i) * size, centerY + sin(i) * size)
     // ellipse(centerX + cos(i) * size, centerY + sin(i) * size, 10, 10)
   }
   size = noise(fc / 300, 0, noiseValue) * sizeSwing + sizeDefault
-  curveVertex(centerX + cosArray[0] * size, centerY + sinArray[0] * size)
+  curveVertex(centerX + cos(0) * size, centerY + sin(0) * size)
   size = noise(fc / 300, 36, noiseValue) * sizeSwing + sizeDefault
-  curveVertex(centerX + cosArray[1] * size, centerY + sinArray[1] * size)
+  curveVertex(centerX + cos(36) * size, centerY + sin(36) * size)
   endShape()
 }
